@@ -1,0 +1,32 @@
+# secrets: never commit (Claude key and worker secret live in Convex env / local .env files)
+.env
+.env.*
+!.env.example
+**/.env
+**/.env.*
+!**/.env.example
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+
+# models: download instead (see README); too large for git
+models/
+weights/
+*.pt
+
+# footage and analysis outputs (source clips: data/SOURCE.md; regenerate with bootstrap_demo.py)
+data/*.mp4
+data/candidates/
+data/uploads/
+outputs/
+
+# web build and local Convex state
+web/node_modules/
+web/.next/
+web/.convex/
+web/tsconfig.tsbuildinfo
+web/.vercel/
+
+.DS_Store

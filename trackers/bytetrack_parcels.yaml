@@ -1,0 +1,13 @@
+# ByteTrack tuned for parcels detected by YOLO-World, whose confidences on wrapped / plastic parcels are often 0.08-0.25.
+# Two Ultralytics defaults drop such parcels even when every frame detects them:
+#   * new_track_thresh 0.25 / track_high_thresh 0.25: a 0.15 parcel can never start or confirm a track;
+#   * fuse_score True: the association cost is 1 - IoU * score, so a 0.15 detection can never pass match_thresh 0.8.
+# Whether a track may count is decided later by the camera's ROI, stationarity, travel and confirmation rules
+# (relevance.py, movement_monitor.py), not by detector confidence.
+tracker_type: bytetrack
+track_high_thresh: 0.08   # first-stage association
+track_low_thresh: 0.03    # second-stage recovery of weak detections (occlusion, motion blur)
+new_track_thresh: 0.08    # start a track from a weak detection
+track_buffer: 45          # keep a lost track ~1.5 s for short occlusions
+match_thresh: 0.8
+fuse_score: False         # match on geometry only; a weak but well-placed detection still continues its track

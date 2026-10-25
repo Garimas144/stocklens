@@ -1,0 +1,10 @@
+# ByteTrack for scenes where workers handle and occlude cartons (receiving yard). Cartons score high here (0.5-0.7), and keeping
+# fuse_score on stops a worker-occluded carton from being re-associated with the wrong box. Start threshold still below the
+# Ultralytics default (0.25) so partly occluded cartons can start a track.
+tracker_type: bytetrack
+track_high_thresh: 0.15
+track_low_thresh: 0.05
+new_track_thresh: 0.12
+track_buffer: 45
+match_thresh: 0.8
+fuse_score: True

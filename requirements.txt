@@ -1,0 +1,10 @@
+ultralytics>=8.3
+opencv-python-headless
+numpy
+pandas
+streamlit
+altair
+anthropic   # optional, only used when ANTHROPIC_API_KEY is set
+# YOLO-World (open-vocabulary YOLOv8, used for cartons/pallets) also needs OpenAI CLIP from Ultralytics:
+#   pip install git+https://github.com/ultralytics/CLIP.git
+convex        # Python client used by the CV worker
