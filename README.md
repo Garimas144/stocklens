@@ -4,6 +4,13 @@ Existing CCTV footage in. YOLOv8 + ByteTrack find and follow packages, a shelf m
 **confirmed physical inventory movements**, Convex reconciles them against warehouse records and opens discrepancies, a Claude
 agent investigates them, and operators review evidence and resolve or correct, all live in a Next.js dashboard.
 
+## How we use Convex
+- Convex is the system of record: cameras, records, movement events, incidents, corrections, chats and the audit log (`web/convex/schema.ts`).
+- The CV worker publishes events idempotently and reconciliation runs in the same mutation, so nothing is double counted (`web/convex/worker.ts`, `lib.ts`).
+- New incidents schedule a Claude investigation (`ctx.scheduler.runAfter`), and corrections need a second human approver (`agent.ts`, `ops.ts`).
+- The camera wall, dashboard, investigations and Ask StockLens update live via `useQuery`, with no refresh.
+- Details and evidence: [hackathon.md](hackathon.md).
+
 ```
 data/*.mp4 ──> worker.py / process_video.py  (Python, local CPU)
                  detector.py        YOLOv8m (people) + YOLOv8s-World (cartons, text prompts) + ByteTrack
